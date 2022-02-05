@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+mainClassName = 'ohtu.Main'
+/* joudumme tässä tehtävässä käyttämään vanhaa tapaa mainClassin määrittelyyn sillä 
+tehtävässä käytettävä shadowJar-plugin ei osaa uudempaa syntaksia
+application {
+    mainClass = 'ohtu.Main'
+}
+
+*/
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ohtu.Main'
+    }
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Gradle: Apache HttpClient Fluent Api
+	// https://mvnrepository.com/artifact/org.apache.httpcomponents/fluent-hc
+	implementation group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.13'
+	// Gradle (Short): Gson
+	// https://mvnrepository.com/artifact/com.google.code.gson/gson
+	implementation 'com.google.code.gson:gson:2.8.9'
+}
