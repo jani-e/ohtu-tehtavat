@@ -7,6 +7,10 @@ package ohtu;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.apache.http.client.fluent.Request;
 
 /**
@@ -23,14 +27,24 @@ public class Main {
                 .returnContent()
                 .asString();
         
-        System.out.println("json-muotoinen data:");
-        System.out.println(bodyText);
+        //System.out.println("json-muotoinen data:");
+        //System.out.println(bodyText);
         
         Gson mapper = new Gson();
         Player[] players = mapper.fromJson(bodyText, Player[].class);
         
-        System.out.println("Oliot:");
-        for (Player player : players) {
+        List<Player> playersList = Arrays.asList(players);
+        
+        List<Player> filteredList = playersList.stream()
+                .filter(nat -> nat.getNationality().equals("FIN"))
+                .collect(Collectors.toList());
+        
+        //System.out.println("Oliot:");
+        
+        Date date = new Date();
+        System.out.println("Players from FIN " + date.toString() + "\n");
+        
+        for (Player player : filteredList) {
             System.out.println(player);
         }
     }
