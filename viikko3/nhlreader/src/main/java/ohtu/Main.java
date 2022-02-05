@@ -8,6 +8,7 @@ package ohtu;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,9 +28,6 @@ public class Main {
                 .returnContent()
                 .asString();
         
-        //System.out.println("json-muotoinen data:");
-        //System.out.println(bodyText);
-        
         Gson mapper = new Gson();
         Player[] players = mapper.fromJson(bodyText, Player[].class);
         
@@ -39,8 +37,13 @@ public class Main {
                 .filter(nat -> nat.getNationality().equals("FIN"))
                 .collect(Collectors.toList());
         
-        //System.out.println("Oliot:");
+        for (Player player : filteredList) {
+            player.setPoints(player.getAssists() + player.getGoals());
+        }
         
+        Collections.sort(filteredList, (player1, player2)
+                -> player2.getPoints() - player1.getPoints());
+               
         Date date = new Date();
         System.out.println("Players from FIN " + date.toString() + "\n");
         

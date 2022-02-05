@@ -9,6 +9,7 @@ public class Player {
     private int penalties;
     private String team;
     private int games;
+    private int points;
 
     public void setName(String name) {
         this.name = name;
@@ -66,10 +67,18 @@ public class Player {
         this.games = games;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
     @Override
     public String toString() {
-        return getName() + " Team " + getTeam() + " Goals " + getGoals() +
-                " Assists " + getAssists();
+        return getName() + "  " + getTeam() + "  " + getGoals() +
+                " + " + getAssists() + " = " + getPoints();
     }
       
 }
