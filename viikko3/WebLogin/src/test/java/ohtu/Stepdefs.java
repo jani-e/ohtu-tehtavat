@@ -91,6 +91,29 @@ public class Stepdefs {
         createWith(username, password1, password2);
     }
     
+    @Given("user with username {string} with password {string} is successfully created")
+    public void userWithUsernameWithPasswordIsSuccessfullyCreated(String username, String password) {
+        commandNewUserIsSelected();
+        createWith(username, password, password);
+    }
+
+    @When("correct username {string} with password {string} are given")
+    public void correctUsernameWithPasswordAreGiven(String username, String password) {
+        logInWith(username, password);
+    }
+
+    
+    @Given("user with username {string} and password {string} is tried to be created")
+    public void userWithUsernameAndPasswordIsTriedToBeCreated(String username, String password) {
+        commandNewUserIsSelected();
+        createWith(username, password, password);
+    }
+
+    @When("username {string} with password {string} are given")
+    public void usernameWithPasswordAreGiven(String username, String password) {
+        logInWith(username, password);
+    }
+    
     @After
     public void tearDown(){
         driver.quit();
@@ -113,7 +136,7 @@ public class Stepdefs {
     }
     
     private void createWith(String username, String password, String passwordConfirmation) {
-        assertTrue(driver.getPageSource().contains("Create username and give password"));
+        pageHasContent("Create username and give password");
         WebElement element = driver.findElement(By.name("username"));
         element.sendKeys(username);
         element = driver.findElement(By.name("password"));
@@ -122,4 +145,5 @@ public class Stepdefs {
         element.sendKeys(passwordConfirmation);
         element.submit(); 
     }
+
 }
