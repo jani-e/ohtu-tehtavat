@@ -8,13 +8,13 @@ public class Ostoskori {
     private int tavaroita;
     private int hinta;
     private Ostos ostos;
-    private List<Ostos> tavarat;
+    private List<Ostos> ostokset;
     
     public Ostoskori() {
         this.tavaroita = 0;
         this.hinta = 0;
         this.ostos = new Ostos(new Tuote("tyhja", 0));
-        this.tavarat = new ArrayList<>(); 
+        this.ostokset = new ArrayList<>(); 
     }
  
     public int tavaroitaKorissa() {
@@ -35,7 +35,7 @@ public class Ostoskori {
  
     public void lisaaTuote(Tuote lisattava) {
         // lisää tuotteen
-        this.tavarat.add(new Ostos(lisattava));
+        this.ostokset.add(new Ostos(lisattava));
         this.ostos = new Ostos(lisattava);
         this.tavaroita++;
         this.hinta += this.ostos.hinta();
@@ -48,7 +48,7 @@ public class Ostoskori {
     public List<Ostos> ostokset() {
         // palauttaa listan jossa on korissa olevat ostokset
  
-        return this.tavarat;
+        return this.ostokset;
     }
  
     public void tyhjenna() {
