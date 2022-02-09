@@ -5,10 +5,12 @@ import java.util.List;
 public class Ostoskori {
     
     private int tavaroita;
+    private int hinta;
     private Ostos ostos;
     
     public Ostoskori() {
         this.tavaroita = 0;
+        this.hinta = 0;
         this.ostos = new Ostos(new Tuote("tyhja", 0));
     }
  
@@ -25,13 +27,14 @@ public class Ostoskori {
     public int hinta() {
         // kertoo korissa olevien tuotteiden yhteenlasketun hinnan
  
-        return this.ostos.hinta();
+        return this.hinta;
     }
  
     public void lisaaTuote(Tuote lisattava) {
         // lisää tuotteen
         this.ostos = new Ostos(lisattava);
         this.tavaroita++;
+        this.hinta += this.ostos.hinta();
     }
  
     public void poista(Tuote poistettava) {

@@ -46,4 +46,14 @@ public class OstoskoriTest {
         kori.lisaaTuote(murot);
         assertEquals(2, kori.tavaroitaKorissa());
     }
+    
+    //step 5
+    @Test
+    public void kahdenEriTuotteenLisaamisenJalkeenKorinSummaOnSamanVerran() {
+        Tuote maito = new Tuote("maito", 3);
+        kori.lisaaTuote(maito);
+        Tuote murot = new Tuote("murot", 7);
+        kori.lisaaTuote(murot);
+        assertEquals(10, kori.hinta());
+    }
 }
