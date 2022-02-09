@@ -9,6 +9,7 @@ public class Ostoskori {
     
     public Ostoskori() {
         this.tavaroita = 0;
+        this.ostos = new Ostos(new Tuote("tyhja", 0));
     }
  
     public int tavaroitaKorissa() {
@@ -24,7 +25,7 @@ public class Ostoskori {
     public int hinta() {
         // kertoo korissa olevien tuotteiden yhteenlasketun hinnan
  
-        return 0;
+        return this.ostos.hinta();
     }
  
     public void lisaaTuote(Tuote lisattava) {
