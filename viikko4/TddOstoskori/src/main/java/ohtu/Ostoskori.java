@@ -32,6 +32,7 @@ public class Ostoskori {
  
     public void lisaaTuote(Tuote lisattava) {
         // lisää tuotteen
+        this.ostokset.add(new Ostos(lisattava));
     }
  
     public void poista(Tuote poistettava) {
