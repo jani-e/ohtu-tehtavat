@@ -7,13 +7,11 @@ public class Ostoskori {
     
     private int tavaroita;
     private int hinta;
-    private Ostos ostos;
     private List<Ostos> ostokset;
     
     public Ostoskori() {
         this.tavaroita = 0;
         this.hinta = 0;
-        this.ostos = new Ostos(new Tuote("tyhja", 0));
         this.ostokset = new ArrayList<>(); 
     }
  
@@ -35,10 +33,15 @@ public class Ostoskori {
  
     public void lisaaTuote(Tuote lisattava) {
         // lisää tuotteen
-        this.ostokset.add(new Ostos(lisattava));
-        this.ostos = new Ostos(lisattava);
         this.tavaroita++;
-        this.hinta += this.ostos.hinta();
+        this.hinta += lisattava.getHinta();
+        for (Ostos ostos : this.ostokset) {
+            if (ostos.tuotteenNimi().equals(lisattava.getNimi())) {
+                System.out.println("testi");
+                return;
+            }
+        }
+        this.ostokset.add(new Ostos(lisattava));
     }
  
     public void poista(Tuote poistettava) {
