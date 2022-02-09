@@ -109,4 +109,51 @@ public class KauppaTest {
         verify(pankki).tilisiirto("jaska", 777, "12345", "33333-44455", 5);
     }
     
+    @Test
+    public void aloitaAsiointiNollaaEdellisenOstoksenTiedot() {
+        when(viite.uusi()).thenReturn(111);
+        when(varasto.saldo(1)).thenReturn(10);
+        when(varasto.saldo(2)).thenReturn(10);
+        when(varasto.haeTuote(1)).thenReturn(new Tuote(1, "maito", 5));
+        when(varasto.haeTuote(2)).thenReturn(new Tuote(2, "murot", 7));
+        
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(2);
+        kauppa.tilimaksu("jaska", "12345");
+        
+        verify(pankki).tilisiirto(anyString(), anyInt(), anyString(), anyString(), eq(7));
+    }
+    
+    @Test
+    public void kauppaPyytaaUudenViitenumeronPerTapahtuma() {
+        when(varasto.saldo(1)).thenReturn(10);
+        when(varasto.haeTuote(1)).thenReturn(new Tuote(1, "maito", 5));
+        
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.tilimaksu("jaska", "12345");
+        
+        verify(viite, times(1)).uusi();
+        
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.tilimaksu("jasku", "23456");
+        
+        verify(viite, times(2)).uusi();
+    }
+    
+    @Test
+    public void poistaakoKauppaTuotteenKorista() {
+        when(varasto.saldo(1)).thenReturn(10);
+        when(varasto.haeTuote(1)).thenReturn(new Tuote(1, "maito", 5));
+        
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.poistaKorista(1);
+        
+        verify(varasto).palautaVarastoon(any());
+    }
+    
 }
