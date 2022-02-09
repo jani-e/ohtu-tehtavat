@@ -3,6 +3,13 @@ package ohtu;
 import java.util.List;
 
 public class Ostoskori {
+    
+    private int tavaroita;
+    private Ostos ostos;
+    
+    public Ostoskori() {
+        this.tavaroita = 0;
+    }
  
     public int tavaroitaKorissa() {
         // kertoo korissa olevien tavaroiden lukumäärän
@@ -11,7 +18,7 @@ public class Ostoskori {
         // jos korissa on 1 kpl tuotetta "maito" ja 1 kpl tuotetta "juusto", 
         //   tulee metodin palauttaa 2   
 
-        return 0;
+        return this.tavaroita;
     }
  
     public int hinta() {
@@ -22,6 +29,8 @@ public class Ostoskori {
  
     public void lisaaTuote(Tuote lisattava) {
         // lisää tuotteen
+        this.ostos = new Ostos(lisattava);
+        this.tavaroita++;
     }
  
     public void poista(Tuote poistettava) {
