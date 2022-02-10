@@ -65,5 +65,8 @@ public class Ostoskori {
  
     public void tyhjenna() {
         // tyhjentää korin
+        for (int i = 0; i < this.ostokset.size(); i++) {
+            this.ostokset.remove(i);
+        }
     }
 }
