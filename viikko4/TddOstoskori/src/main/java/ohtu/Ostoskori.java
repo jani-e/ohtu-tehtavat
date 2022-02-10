@@ -45,7 +45,11 @@ public class Ostoskori {
     }
  
     public void poista(Tuote poistettava) {
-        // poistaa tuotteen
+        for (Ostos ostos : this.ostokset) {
+            if (ostos.tuotteenNimi().equals(poistettava.getNimi())) {
+                ostos.muutaLukumaaraa(-1);
+            }
+        }
     }
  
     public List<Ostos> ostokset() {
