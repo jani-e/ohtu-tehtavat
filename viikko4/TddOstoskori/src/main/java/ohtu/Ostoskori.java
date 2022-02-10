@@ -49,8 +49,7 @@ public class Ostoskori {
             if (ostos.tuotteenNimi().equals(poistettava.getNimi())) {
                 ostos.muutaLukumaaraa(-1);
                 if (ostos.lukumaara() == 0) {
-                    int index = this.ostokset.indexOf(ostos);
-                    this.ostokset.remove(index);
+                    this.ostokset.remove(this.ostokset.indexOf(ostos));
                     return;
                 }
             }
