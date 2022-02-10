@@ -37,7 +37,7 @@ public class Ostoskori {
         this.hinta += lisattava.getHinta();
         for (Ostos ostos : this.ostokset) {
             if (ostos.tuotteenNimi().equals(lisattava.getNimi())) {
-                System.out.println("testi");
+                ostos.muutaLukumaaraa(1);
                 return;
             }
         }
